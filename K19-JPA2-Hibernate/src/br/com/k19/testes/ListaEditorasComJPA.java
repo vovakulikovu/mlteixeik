@@ -15,7 +15,7 @@ public class ListaEditorasComJPA {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("K21_livraria_pu");
 		EntityManager manager = factory.createEntityManager();
 		
-		Query query = manager.createQuery("SELECT  e from Editora e");
+		Query query = manager.createQuery("SELECT e from Editora e");
 		List<Editora> editoras = query.getResultList();
 		
 		for (Editora e : editoras) {
