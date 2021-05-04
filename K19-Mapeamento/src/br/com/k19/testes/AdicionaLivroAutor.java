@@ -1,26 +1,29 @@
 package br.com.k19.testes;
 
-import java.util.Calendar;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.k19.modelo.Usuario;
+import br.com.k19.modelo.Autor;
+import br.com.k19.modelo.Livro;
 
-public class AdicionaUsuario {
-	
+public class AdicionaLivroAutor {
+
 	public static void main(String[] args) {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("K21_mapeamento_pu");
 		EntityManager manager = factory.createEntityManager();
 		
 		manager.getTransaction().begin();
 		
-		Usuario usuario = new Usuario();
-		usuario.setEmail("contato@k19.com.br");
-		usuario.setDataDeCadastro(Calendar.getInstance());
+		Autor a = new Autor();
+		a.setNome("Rafael Cosentino");
 		
-		manager.persist(usuario);
+		Livro l = new Livro();
+		l.setNome("JPA 2");
+		l.getAutores().add(a);
+		
+		manager.persist(a);
+		manager.persist(l);
 		
 		manager.getTransaction().commit();
 		

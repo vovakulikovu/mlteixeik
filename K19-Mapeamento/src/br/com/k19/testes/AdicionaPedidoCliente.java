@@ -6,25 +6,31 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.k19.modelo.Usuario;
+import br.com.k19.modelo.Cliente;
+import br.com.k19.modelo.Pedido;
 
-public class AdicionaUsuario {
-	
+public class AdicionaPedidoCliente {
+
 	public static void main(String[] args) {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("K21_mapeamento_pu");
 		EntityManager manager = factory.createEntityManager();
 		
 		manager.getTransaction().begin();
 		
-		Usuario usuario = new Usuario();
-		usuario.setEmail("contato@k19.com.br");
-		usuario.setDataDeCadastro(Calendar.getInstance());
+		Cliente c = new Cliente();
+		c.setNome("Rafael Consentino");
 		
-		manager.persist(usuario);
+		Pedido p = new Pedido();
+		p.setData(Calendar.getInstance());
+		p.setCliente(c);
 		
+		manager.persist(c);
+		manager.persist(p);
+
 		manager.getTransaction().commit();
 		
 		manager.close();
 		factory.close();
 	}
+
 }

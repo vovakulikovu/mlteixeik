@@ -1,26 +1,32 @@
 package br.com.k19.testes;
 
-import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.k19.modelo.Usuario;
+import br.com.k19.modelo.Fatura;
+import br.com.k19.modelo.Ligacao;
 
-public class AdicionaUsuario {
-	
+public class AdicionaFaturaLigacao {
 	public static void main(String[] args) {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("K21_mapeamento_pu");
 		EntityManager manager = factory.createEntityManager();
 		
 		manager.getTransaction().begin();
 		
-		Usuario usuario = new Usuario();
-		usuario.setEmail("contato@k19.com.br");
-		usuario.setDataDeCadastro(Calendar.getInstance());
+		Ligacao ligacao1 = new Ligacao();
+		ligacao1.setDuracao(162);
 		
-		manager.persist(usuario);
+		Ligacao ligacao2 = new Ligacao();
+		ligacao2.setDuracao(324);
+		
+		Fatura fatura = new Fatura();
+		fatura.setVencimento(new GregorianCalendar(2012, 11, 20));
+		
+		fatura.getLigacoes().add(ligacao1);
+		fatura.getLigacoes().add(ligacao2);
 		
 		manager.getTransaction().commit();
 		
